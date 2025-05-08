@@ -1,0 +1,12 @@
+langchain
+langchain[openai]
+faiss-cpu
+pydantic
+fastapi
+uvicorn
+python-dotenv
+pytest
+pytest-cov
+sentence-transformers
+faiss-cpu
+numpy
