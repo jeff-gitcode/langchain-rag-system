@@ -5,7 +5,6 @@ POST {{hostName}}/ingest
 Content-Type: application/json
 
 {
-  "id": "1",
   "content": "This is a test document.",
   "metadata": {
     "author": "John Doe",
@@ -22,3 +21,7 @@ Content-Type: application/json
 {
   "query": "test document"
 }
+
+### Test the /delete endpoint
+# @name delete
+DELETE {{hostName}}/delete/1

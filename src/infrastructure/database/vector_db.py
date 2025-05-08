@@ -59,3 +59,9 @@ class VectorDB(VectorDBRepository):
         # Retrieve corresponding documents
         results = [Document(**self.documents[i]) for i in indices[0] if i < len(self.documents)]
         return results
+    
+    def delete_document(self, document_id: str) -> None:
+        # Remove the document with the given ID
+        self.documents = [doc for doc in self.documents if doc["id"] != document_id]
+        with open(self.metadata_path, "w") as f:
+            json.dump(self.documents, f)

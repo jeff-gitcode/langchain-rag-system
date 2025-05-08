@@ -6,7 +6,6 @@ import os
 from dotenv import load_dotenv
 
 class IngestRequest(BaseModel):
-    id: str
     content: str
     metadata: dict
     
@@ -30,3 +29,11 @@ def ingest_data(data: IngestRequest):
 def retrieve_data(criteria: RetrieveRequest):
     results = mediator.send("retrieve_data", criteria.__dict__)
     return {"results": results}
+
+@app.delete("/delete/{document_id}")
+def delete_document(document_id: str):
+    try:
+        vector_db.delete_document(document_id)
+        return {"message": f"Document with ID {document_id} deleted successfully"}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))

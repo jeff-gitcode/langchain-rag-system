@@ -1,4 +1,5 @@
 # FILE: src/application/commands/ingest_data.py
+import uuid
 from src.domain.entities.document import Document
 
 class IngestDataCommand:
@@ -8,7 +9,7 @@ class IngestDataCommand:
     def execute(self, data: dict):
         # Convert dict to Document instance
         document = Document(
-            id=data["id"],
+            id=str(uuid.uuid4()),
             content=data["content"],
             metadata=data["metadata"]
         )

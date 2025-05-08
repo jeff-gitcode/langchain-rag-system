@@ -10,3 +10,7 @@ class VectorDBRepository(ABC):
     @abstractmethod
     def get_documents(self, criteria: dict) -> List[Document]:
         pass
+
+    @abstractmethod
+    def delete_document(self, document_id: str) -> None:
+        pass
