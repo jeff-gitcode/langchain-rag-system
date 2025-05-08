@@ -45,6 +45,20 @@ langchain-rag-system
 - **Clean Architecture**: Separation of concerns with clearly defined layers (Application, Domain, Infrastructure, Presentation).
 - **CQRS Pattern**: Commands for ingestion and queries for retrieval.
 
+## Tech Stack
+
+The project is built using the following technologies:
+
+- **Python**: Core programming language for the project.
+- **FastAPI**: Framework for building the RESTful API.
+- **FAISS**: Vector database for efficient similarity search.
+- **Sentence Transformers**: Pre-trained models for generating vector embeddings.
+- **LangChain**: Framework for building applications with LLMs (Language Models).
+- **Pydantic**: Data validation and settings management.
+- **Uvicorn**: ASGI server for running the FastAPI application.
+- **pytest**: Testing framework for unit and integration tests.
+- **dotenv**: For managing environment variables.
+
 ## Setup Instructions
 
 1. **Clone the repository:**
