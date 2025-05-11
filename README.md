@@ -23,10 +23,12 @@ sequenceDiagram
     API->>Mediator: send("retrieve_data", criteria)
     Mediator->>VectorDB: get_documents(query)
     VectorDB-->>Mediator: List of relevant documents
-    Mediator->>LangChainService: generate_response(query, context)
+    Note over Mediator: Retrieval Step (R in RAG)
+    Mediator->>LangChainService: Combine query and retrieved documents (Augmentation Step)
     LangChainService->>LLM: Generate response (query + context)
     LLM-->>LangChainService: Generated response
     LangChainService-->>Mediator: Generated response
+    Note over Mediator: Generation Step (G in RAG)
     Mediator-->>API: {"query": query, "retrieved_documents": [...], "generated_response": response}
     API-->>Client: {"query": query, "retrieved_documents": [...], "generated_response": response}
 
