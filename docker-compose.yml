@@ -1,0 +1,16 @@
+version: "3.8"
+
+services:
+  ollama:
+    image: ollama/ollama:latest
+    container_name: ollama
+    ports:
+      - "11434:11434" # Expose Ollama's default API port
+    volumes:
+      - ollama_data:/data # Persist data across container restarts
+    environment:
+      - OLLAMA_API_KEY=${OLLAMA_API_KEY} # Pass the API key from .env
+    restart: unless-stopped
+
+volumes:
+  ollama_data:

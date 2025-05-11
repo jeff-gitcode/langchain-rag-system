@@ -1,4 +1,7 @@
 @hostName=http://127.0.0.1:8000
+@ollamaHost=http://localhost:11434
+@apiKey=your_api_key_here
+
 ### Test the /ingest endpoint
 # @name ingest
 POST {{hostName}}/ingest
@@ -13,7 +16,6 @@ Content-Type: application/json
 }
 
 ### Test the /retrieve endpoint
-# name of the document to retrieve
 # @name retrieve
 GET {{hostName}}/retrieve
 Content-Type: application/json
@@ -24,4 +26,21 @@ Content-Type: application/json
 
 ### Test the /delete endpoint
 # @name delete
-DELETE {{hostName}}/delete/3e83bbe4-ac4f-46e2-885c-da8c252426c8
+DELETE {{hostName}}/delete/946b2936-c638-4e54-bc35-8ff30c39518d
+
+### List available models in Ollama
+# @name list-models
+GET {{ollamaHost}}/api/models
+Content-Type: application/json
+Authorization: Bearer {{apiKey}}
+
+### Test the Ollama /generate endpoint
+# @name ollama-generate
+POST {{ollamaHost}}/api/generate
+Content-Type: application/json
+Authorization: Bearer {{apiKey}}
+
+{
+  "model": "llama2-7b",
+  "prompt": "What is Artificial Intelligence?"
+}
