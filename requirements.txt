@@ -1,5 +1,4 @@
 langchain
-langchain[openai]
 faiss-cpu
 pydantic
 fastapi
@@ -8,5 +7,4 @@ python-dotenv
 pytest
 pytest-cov
 sentence-transformers
-faiss-cpu
 numpy

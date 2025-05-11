@@ -19,9 +19,9 @@ GET {{hostName}}/retrieve
 Content-Type: application/json
 
 {
-  "query": "test document"
+  "query": "test"
 }
 
 ### Test the /delete endpoint
 # @name delete
-DELETE {{hostName}}/delete/1
+DELETE {{hostName}}/delete/3e83bbe4-ac4f-46e2-885c-da8c252426c8
