@@ -2,6 +2,40 @@
 
 This project implements a Retrieval-Augmented Generation (RAG) system using LangChain and a vector database. The architecture follows Clean Architecture principles and employs the Command Query Responsibility Segregation (CQRS) pattern.
 
+## System Architecture
+```mermaid
+sequenceDiagram
+    participant Client
+    participant API
+    participant Mediator
+    participant VectorDB
+    participant LangChainService
+    participant LLM
+
+    Client->>API: POST /ingest (content, metadata)
+    API->>Mediator: send("ingest_data", data)
+    Mediator->>VectorDB: add_document(document)
+    VectorDB-->>Mediator: Document added
+    Mediator-->>API: {"message": "Data ingested successfully"}
+    API-->>Client: {"message": "Data ingested successfully"}
+
+    Client->>API: GET /retrieve (query)
+    API->>Mediator: send("retrieve_data", criteria)
+    Mediator->>VectorDB: get_documents(query)
+    VectorDB-->>Mediator: List of relevant documents
+    Mediator->>LangChainService: generate_response(query, context)
+    LangChainService->>LLM: Generate response (query + context)
+    LLM-->>LangChainService: Generated response
+    LangChainService-->>Mediator: Generated response
+    Mediator-->>API: {"query": query, "retrieved_documents": [...], "generated_response": response}
+    API-->>Client: {"query": query, "retrieved_documents": [...], "generated_response": response}
+
+    Client->>API: DELETE /delete/{document_id}
+    API->>VectorDB: delete_document(document_id)
+    VectorDB-->>API: {"message": "Document deleted successfully"}
+    API-->>Client: {"message": "Document deleted successfully"}
+```
+
 ## Project Structure
 
 ```
