@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from src.infrastructure.database.vector_db import VectorDB
 from src.application.mediator import AppMediator
