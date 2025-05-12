@@ -79,6 +79,8 @@ langchain-rag-system
 
 - **Ingestion**: Add documents to a FAISS-based vector database with metadata.
 - **Retrieval**: Perform similarity searches using Sentence Transformers to retrieve relevant documents.
+- **Augmentation**: Combine retrieved documents with the query to provide context for the LLM.
+- **Generation**: Use an LLM (e.g., OpenAI's ChatGPT or Ollama) to generate responses based on the query and augmented context.
 - **LangChain Integration**: Placeholder for LangChain-based processing and response generation.
 - **Clean Architecture**: Separation of concerns with clearly defined layers (Application, Domain, Infrastructure, Presentation).
 - **CQRS Pattern**: Commands for ingestion and queries for retrieval.
@@ -96,6 +98,7 @@ The project is built using the following technologies:
 - **Uvicorn**: ASGI server for running the FastAPI application.
 - **pytest**: Testing framework for unit and integration tests.
 - **dotenv**: For managing environment variables.
+- **ollama**: LLM (Language Models).
 
 ## Setup Instructions
 
@@ -119,7 +122,31 @@ The project is built using the following technologies:
 4. **Configure environment variables:**
    Create a `.env` file in the root directory and add your configuration settings, such as database connection strings and API keys.
 
-5. **Run the Application:**
+5. Start Ollama Using Docker Compose
+```bash
+docker-compose up -d
+docker logs ollama
+```
+
+6. Verify Ollama is Running
+```bash
+docker ps
+# please execute from docker command. go to docker desktop, click on ollama, then click on exec, should shows command
+# Check Ollama
+ollama --version
+# Pull llama3.2 model
+ollama pull llama3.2
+# Run llama3.2 model
+ollama run llama3.2
+
+# Ollama API reference link: https://github.com/ollama/ollama/blob/main/docs/api.md
+# Access from local using curl after pull llama3.2
+curl http://localhost:11434/api/generate -d '{ "model": "llama3.2", "prompt": "How are you today?"}'
+# The format of the default response is not very friendly, let's add additional parameters to generate a single json object data, and the response is the return content.
+curl http://localhost:11434/api/generate -d '{ "model": "llama3.2", "prompt": "How are you today?", "stream": false}'
+```
+
+7. **Run the Application:**
 
 #### Start the API Server
 
@@ -129,7 +156,7 @@ uvicorn src.presentation.api.main:app --reload
 
 Access the API documentation at [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs).
 
-6. **Testing:**
+8. **Testing:**
 
 Run the tests using `pytest`:
 
