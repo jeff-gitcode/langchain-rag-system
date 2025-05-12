@@ -1,5 +1,6 @@
 import pytest
 from unittest.mock import Mock
+from src.domain.entities.document import Document
 from src.application.queries.retrieve_data import RetrieveDataQuery
 
 
@@ -23,8 +24,8 @@ def test_execute_with_valid_query(
 ):
     # Mock the vector database to return relevant documents
     mock_vector_db_repository.get_documents.return_value = [
-        {"id": "1", "content": "AI is transforming industries."},
-        {"id": "2", "content": "Machine learning is a subset of AI."},
+        Document(id="1", content="AI is transforming industries.", metadata={}),
+        Document(id="2", content="Machine learning is a subset of AI.", metadata={}),
     ]
 
     # Mock the LangChain service to generate a response
@@ -65,7 +66,7 @@ def test_execute_with_no_query(retrieve_data_query):
 def test_execute_with_empty_documents(
     retrieve_data_query, mock_vector_db_repository, mock_langchain_service
 ):
-    # Mock the vector database to return no documents
+    # Declare an empty array for Document objects
     mock_vector_db_repository.get_documents.return_value = []
 
     # Mock the LangChain service to generate a response
@@ -81,9 +82,7 @@ def test_execute_with_empty_documents(
 
     # Assertions
     mock_vector_db_repository.get_documents.assert_called_once_with("What is AI?")
-    mock_langchain_service.generate_response.assert_called_once_with(
-        "Query: What is AI?\nContext: "
-    )
+    mock_langchain_service.generate_response.assert_not_called()  # No documents, so no call to generate_response
 
     assert result["query"] == "What is AI?"
     assert len(result["retrieved_documents"]) == 0
@@ -95,7 +94,8 @@ def test_execute_with_large_context(
 ):
     # Mock the vector database to return many documents
     mock_vector_db_repository.get_documents.return_value = [
-        {"id": str(i), "content": f"Document {i} content."} for i in range(1, 6)
+        Document(id=str(i), content=f"Document {i} content.", metadata={})
+        for i in range(1, 6)
     ]
 
     # Mock the LangChain service to generate a response

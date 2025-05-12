@@ -70,7 +70,7 @@ Content-Type: application/json
 
 ### Test the /retrieve endpoint, querying for a specific document
 # @name retrieve
-GET {{hostName}}/retrieve
+POST {{hostName}}/retrieve
 Content-Type: application/json
 
 {
