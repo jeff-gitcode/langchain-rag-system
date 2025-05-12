@@ -129,6 +129,9 @@ docker logs ollama
 ```
 
 6. Verify Ollama is Running
+
+![Ollama](doc/ollama.png)
+
 ```bash
 docker ps
 # please execute from docker command. go to docker desktop, click on ollama, then click on exec, should shows command
