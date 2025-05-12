@@ -3,30 +3,83 @@
 @apiKey=your_api_key_here
 
 ### Test the /ingest endpoint
-# @name ingest
+# @name ingest1
 POST {{hostName}}/ingest
 Content-Type: application/json
 
 {
-  "content": "This is a test document.",
+  "content": "The capybara is the largest rodent in the world and typically lives for about 8 to 10 years in the wild.",
   "metadata": {
     "author": "John Doe",
     "category": "test"
   }
 }
 
-### Test the /retrieve endpoint
+### Test the /ingest endpoint
+# @name ingest2
+POST {{hostName}}/ingest
+Content-Type: application/json
+
+{
+  "content": "Frigatebirds are known to sleep while flying by shutting down one half of their brain at a time.",
+  "metadata": {
+    "author": "John Doe",
+    "category": "test"
+  }
+}
+
+### Test the /ingest endpoint
+# @name ingest3
+POST {{hostName}}/ingest
+Content-Type: application/json
+
+{
+  "content": "The African elephant has larger ears shaped like the African continent, while the Asian elephant has smaller, rounded ears. African elephants are generally larger and both males and females have tusks, whereas only some male Asian elephants have tusks.",
+  "metadata": {
+    "author": "John Doe",
+    "category": "test"
+  }
+}
+
+### Test the /ingest endpoint
+# @name ingest4
+POST {{hostName}}/ingest
+Content-Type: application/json
+
+{
+  "content": "Axolotls are amphibians that live in lakes in Mexico. They are carnivorous and feed on small prey like worms, insects, and small fish.",
+  "metadata": {
+    "author": "John Doe",
+    "category": "test"
+  }
+}
+
+### Test the /ingest endpoint
+# @name ingest5
+POST {{hostName}}/ingest
+Content-Type: application/json
+
+{
+  "content": "Blue whales have a gestation period of approximately 11 to 12 months.",
+  "metadata": {
+    "author": "John Doe",
+    "category": "test"
+  }
+}
+
+
+### Test the /retrieve endpoint, querying for a specific document
 # @name retrieve
 GET {{hostName}}/retrieve
 Content-Type: application/json
 
 {
-  "query": "test"
+  "query": "What's the difference between African and Asian elephants?"
 }
 
 ### Test the /delete endpoint
 # @name delete
-DELETE {{hostName}}/delete/946b2936-c638-4e54-bc35-8ff30c39518d
+DELETE {{hostName}}/delete/64a596de-6fbc-44ae-9fa4-e78452dfc2ed
 
 ### List available models in Ollama
 # @name list-models
@@ -37,10 +90,21 @@ Authorization: Bearer {{apiKey}}
 ### Test the Ollama /generate endpoint
 # @name ollama-generate
 POST {{ollamaHost}}/api/generate
+Content-Type: application/x-www-form-urlencoded
+# Authorization: Bearer {{apiKey}}
+
+'{
+  "model": "llama3.2",
+  "prompt": "How are you today?",
+  "stream": false
+}'
+
+###
+POST http://localhost:11434/api/generate
 Content-Type: application/json
-Authorization: Bearer {{apiKey}}
 
 {
-  "model": "llama2-7b",
-  "prompt": "What is Artificial Intelligence?"
+  "model": "llama3.2",
+  "prompt": "How are you today?",
+  "stream": false
 }

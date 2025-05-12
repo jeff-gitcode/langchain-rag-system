@@ -37,6 +37,8 @@ sequenceDiagram
     VectorDB-->>API: {"message": "Document deleted successfully"}
     API-->>Client: {"message": "Document deleted successfully"}
 ```
+## LangChain RAG Ollama Demo
+![LangChain RAG Ollama Demo](doc/langchain-rag-ollama-demo.gif)
 
 ## Project Structure
 
@@ -164,6 +166,43 @@ To run the tests, execute:
 ```
 pytest src/tests
 ```
+
+## Insert Test Data
+```
+Document 1:
+The capybara is the largest rodent in the world and typically lives for about 8 to 10 years in the wild.
+
+Document 2:
+Frigatebirds are known to sleep while flying by shutting down one half of their brain at a time.
+
+Document 3:
+The African elephant has larger ears shaped like the African continent, while the Asian elephant has smaller, rounded ears. African elephants are generally larger and both males and females have tusks, whereas only some male Asian elephants have tusks.
+
+Document 4:
+Axolotls are amphibians that live in lakes in Mexico. They are carnivorous and feed on small prey like worms, insects, and small fish.
+
+Document 5:
+Blue whales have a gestation period of approximately 11 to 12 months.
+```
+
+## Ask a Test Prompt
+Now, you ask one of these test prompts through your interface. Examples:
+
+✅ Prompt: "How long do capybaras live?"
+
+✅ Expected retrieval: Document 1
+
+✅ Expected output: "Capybaras typically live for about 8 to 10 years in the wild."
+
+✅ Prompt: "Which bird can sleep while flying?"
+
+✅ Should retrieve: Document 2
+
+✅ Output: "Frigatebirds can sleep while flying by shutting down one half of their brain."
+
+✅ Prompt: "What's the difference between African and Asian elephants?"
+
+✅ Should retrieve: Document 3
 
 ## Contributing
 

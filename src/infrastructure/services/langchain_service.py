@@ -38,7 +38,7 @@ class LangChainService:
         """
         try:
             headers = {"Authorization": f"Bearer {self.api_key}"}
-            payload = {"model": "llama", "prompt": query}
+            payload = {"model": "llama3.2", "prompt": query, "stream": False}
             print("Payload: ", payload)  # Debugging line
             print("Headers: ", headers)  # Debugging line
             print("Ollama URL: ", self.ollama_url)  # Debugging line
