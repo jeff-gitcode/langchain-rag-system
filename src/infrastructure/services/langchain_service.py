@@ -47,6 +47,9 @@ class LangChainService:
             )
             response.raise_for_status()
             return response.json().get("response", "No response generated.")
+        except requests.exceptions.RequestException as e:
+            print(f"Error generating response: {e}")
+            return f"An error occurred while generating the response: {e}"
         except Exception as e:
             print(f"Error generating response: {e}")
             return "An error occurred while generating the response."
